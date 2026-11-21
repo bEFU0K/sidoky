@@ -1,0 +1,4 @@
+<resources>
+    <color name="ic_launcher_background">#E07A5F</color>
+    <style name="Theme.PixelSudoku" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>
