@@ -16,7 +16,9 @@ android {
         versionName = "1.0.0"
     }
 
+    // Ключ подписи: сначала из секретов GitHub (KEYSTORE_PATH), иначе из файла signing/release.jks в репозитории
     val ksPath = System.getenv("KEYSTORE_PATH")
+    val repoKs = rootProject.file("signing/release.jks")
     signingConfigs {
         if (ksPath != null && file(ksPath).exists()) {
             create("release") {
@@ -24,6 +26,13 @@ android {
                 storePassword = System.getenv("KEYSTORE_PASSWORD")
                 keyAlias = System.getenv("KEY_ALIAS")
                 keyPassword = System.getenv("KEY_PASSWORD")
+            }
+        } else if (repoKs.exists()) {
+            create("release") {
+                storeFile = repoKs
+                storePassword = "PixelSudoku2026"
+                keyAlias = "pixelsudoku"
+                keyPassword = "PixelSudoku2026"
             }
         }
     }
